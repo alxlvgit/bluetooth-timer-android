@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bluetooth"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textview_countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="141dp"
+        android:gravity="center"
+        android:text="@string/timerDigits"
+        android:textColor="#535561"
+        android:textSize="45sp"
+        tools:ignore="RelativeOverlap" />
+
+    <EditText
+        android:id="@+id/minutesInput"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="29dp"
+        android:alpha="0.5"
+        android:background="@android:drawable/editbox_background_normal"
+        android:gravity="center"
+        android:hint="@string/minutes"
+        android:inputType="number"
+        android:textColor="#191616"
+        android:textSize="14sp"
+       />
+
+
+    <Button
+        android:id="@+id/select_bt_btn"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="241dp"
+        android:layout_height="153dp"
+        android:layout_above="@+id/minutesInput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="82dp"
+        android:layout_marginBottom="55dp"
+        android:text="@string/press_to_select_device_to_unpair"
+        android:textColor="#535561"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/devices_list"
+        android:layout_width="212dp"
+        android:layout_height="286dp"
+        android:layout_above="@+id/select_bt_btn"
+        android:layout_below="@+id/bluetoothOff"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/white"
+        android:visibility="invisible" />
+
+    <Switch
+        android:id="@+id/switch_format"
+        android:layout_width="78dp"
+        android:layout_height="54dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/hr_min_sec"
+        android:textColor="#535561"
+        android:textStyle="bold"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/bluetoothOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_countdown"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="102dp"
+        android:text="@string/bluetooth_off"
+        android:textColor="#535561"
+        android:textStyle="bold"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Button
+        android:id="@+id/start_pause"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginRight="315dp"
+        android:layout_marginBottom="23dp"
+        android:text="@string/start"
+        android:textColor="#535561"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/reset_btn"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="23dp"
+        android:text="@string/reset"
+        android:textColor="#535561"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        tools:textStyle="bold"
+        tools:visibility="visible" />
+
+
+</RelativeLayout>

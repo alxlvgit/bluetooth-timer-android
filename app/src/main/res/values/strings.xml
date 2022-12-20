@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Bluetooth timer</string>
+    <string name="timerDigits">00:00</string>
+    <string name="minutes">minutes</string>
+    <string name="press_to_select_device_to_unpair">Press to select device to unpair</string>
+    <string name="hr_min_sec">hr/min/sec</string>
+    <string name="bluetooth_off">Bluetooth OFF</string>
+    <string name="start">Start</string>
+    <string name="reset">Reset</string>
+</resources>
