@@ -110,9 +110,11 @@ public class MainActivity extends AppCompatActivity {
                     // Find bluetooth device by name and unpair it if exists
                     @SuppressLint("MissingPermission") Set<BluetoothDevice> pairedDevices = bAdapter.getBondedDevices();
                     for (BluetoothDevice bt : pairedDevices) {
-                        if (bt.getName().contains(deviceToUnpair)) {
-                            unpairDevice(bt);
-                            deviceToUnpair = null;
+                        if (bt != null && deviceToUnpair!= null) {
+                            if (bt.getName().contains(deviceToUnpair)) {
+                                unpairDevice(bt);
+                                deviceToUnpair = null;
+                            }
                         }
                     }
 
