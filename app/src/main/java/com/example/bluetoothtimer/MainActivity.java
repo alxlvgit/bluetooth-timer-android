@@ -1,11 +1,20 @@
 package com.example.bluetoothtimer;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,12 +28,11 @@ import android.widget.Toast;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
-
-import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
     private Button startPauseButton;
@@ -42,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private Switch timeFormat;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch bluetoothOff;
+    private static final int BT_PERMISSIONS_REQUEST_CODE = 0x55;
+    private int permissionsCount;
 
     // min/sec format for timer
     public void updateCountdownTextMinutes(long millis) {
@@ -193,6 +203,8 @@ public class MainActivity extends AppCompatActivity {
         bluetoothOff = findViewById(R.id.bluetoothOff);
         listView = (ListView) findViewById(R.id.devices_list);
 
+        checkBTPermissions();
+
         // List all bluetooth devices in a listview and select the device to unpair
         selectBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,5 +259,67 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // Get all needed permissions
+    // For Android 12 and above
+    private String[] getMissingBlePermissions() {
+        String[] missingPermissions = null;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+                missingPermissions = new String[1];
+                missingPermissions[0] = Manifest.permission.BLUETOOTH_SCAN;
+            }
+
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                if (missingPermissions == null) {
+                    missingPermissions = new String[1];
+                    missingPermissions[0] = Manifest.permission.BLUETOOTH_CONNECT;
+                } else {
+                    missingPermissions = Arrays.copyOf(missingPermissions, missingPermissions.length + 1);
+                    missingPermissions[missingPermissions.length - 1] = Manifest.permission.BLUETOOTH_CONNECT;
+                }
+            }
+
+        }
+        return missingPermissions;
+    }
+
+    private void checkBTPermissions() {
+        String[] missingPermissions = getMissingBlePermissions();
+        if (missingPermissions == null || missingPermissions.length == 0) {
+            Log.i(TAG, "checkBTPermissions: Permissions is already granted");
+            return;
+        }
+
+        for (String permission : missingPermissions)
+            Log.d(TAG, "checkBTPermissions: missing permissions " + permission);
+        permissionsCount = missingPermissions.length;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(missingPermissions, BT_PERMISSIONS_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == BT_PERMISSIONS_REQUEST_CODE) {
+            int index = 0;
+            for (int result : grantResults) {
+                if (result == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(TAG, "Permission granted for " + permissions[index]);
+                    if (permissionsCount > 0) permissionsCount--;
+                    if (permissionsCount == 0) {
+                        // All permissions have been granted from user.
+                    }
+                } else {
+                    Log.d(TAG, "Permission denied for " + permissions[index]);
+                    // Permission denied
+                }
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }
