@@ -265,7 +265,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Get all needed permissions
     // For Android 12 and above
-    private String[] getMissingBlePermissions() {
+    // https://stackoverflow.com/questions/72825519/android-permissions-check-for-ble
+
+    private String[] getMissingBPermissions() {
         String[] missingPermissions = null;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -289,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkBTPermissions() {
-        String[] missingPermissions = getMissingBlePermissions();
+        String[] missingPermissions = getMissingBPermissions();
         if (missingPermissions == null || missingPermissions.length == 0) {
             Log.i(TAG, "checkBTPermissions: Permissions is already granted");
             return;
