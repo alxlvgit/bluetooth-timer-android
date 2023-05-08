@@ -21,13 +21,14 @@
         android:textSize="45sp"
         tools:ignore="RelativeOverlap" />
 
+
     <EditText
         android:id="@+id/minutesInput"
-        android:layout_width="120dp"
-        android:layout_height="30dp"
+        android:layout_width="144dp"
+        android:layout_height="41dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="29dp"
+        android:layout_marginBottom="26dp"
         android:alpha="0.5"
         android:background="@android:drawable/editbox_background_normal"
         android:gravity="center"
@@ -35,62 +36,6 @@
         android:inputType="number"
         android:textColor="#191616"
         android:textSize="14sp" />
-
-
-    <Button
-        android:id="@+id/select_bt_btn"
-        style="@style/Widget.AppCompat.ActionButton"
-        android:layout_width="241dp"
-        android:layout_height="153dp"
-        android:layout_above="@+id/minutesInput"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="82dp"
-        android:layout_marginBottom="55dp"
-        android:text="@string/press_to_select_device_to_unpair"
-        android:textColor="#535561"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <ListView
-        android:id="@+id/devices_list"
-        android:layout_width="212dp"
-        android:layout_height="286dp"
-        android:layout_above="@+id/select_bt_btn"
-        android:layout_below="@+id/bluetoothOff"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="-2dp"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/white"
-        android:visibility="invisible" />
-
-    <Switch
-        android:id="@+id/switch_format"
-        android:layout_width="78dp"
-        android:layout_height="54dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="9dp"
-        android:gravity="center"
-        android:text="@string/hr_min_sec"
-        android:textColor="#535561"
-        android:textStyle="bold"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-    <Switch
-        android:id="@+id/bluetoothOff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textview_countdown"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="102dp"
-        android:text="@string/bluetooth_off"
-        android:textColor="#535561"
-        android:textStyle="bold"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Button
         android:id="@+id/start_pause"
